@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:blog_app/providers/user_provider.dart';
 import 'package:blog_app/routes/app_route.gr.dart';
 import 'package:blog_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
 class MainScreen extends StatefulWidget {
@@ -12,27 +18,46 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final GlobalKey<NavigatorState> homeNavKey = GlobalKey<NavigatorState>();
+  void getUserData() async {
+    final pref = await SharedPreferences.getInstance();
+    var userdata = pref.getString('userData');
+    if (userdata == null) {
+      return null;
+    }
+    final Map<String, dynamic> decodedUserData = jsonDecode(userdata);
+    if (!mounted) {
+      return;
+    }
+    context.read<UserProvider>().setUserData(decodedUserData);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
-      routes: [
-        HomeNavigationRoute(navigatorKey: homeNavKey),
-        const SavedRoute(),
-        const ProfileRoute(),
+      routes: const [
+        HomeNavigationRoute(),
+        SavedRoute(),
+        YourBlogListRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
+          type: BottomNavigationBarType.shifting,
+          unselectedItemColor: Colors.grey,
           elevation: 14,
           currentIndex: tabsRouter.activeIndex,
           onTap: (index) {
-            if (tabsRouter.activeIndex != index) {
-              if (tabsRouter.activeIndex == 0) {
-                homeNavKey.currentState?.popUntil((router) => router.isFirst);
-              }
-              tabsRouter.setActiveIndex(index);
-            }
+            // if (tabsRouter.activeIndex != index) {
+            //   if (tabsRouter.activeIndex == 0) {
+            //     tabsRouter.stack.first;
+            //   }
+            tabsRouter.setActiveIndex(index);
+            // }
           },
           selectedIconTheme: const IconThemeData(color: AppColor.buttonColor),
           selectedItemColor: AppColor.buttonColor,
@@ -42,7 +67,7 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(
                 label: 'Saved', icon: Icon(Icons.favorite_outlined)),
             BottomNavigationBarItem(
-                label: 'Profile', icon: Icon(Icons.supervised_user_circle)),
+                label: 'Your Blogs', icon: Icon(Iconsax.user_octagon4)),
           ],
         );
       },

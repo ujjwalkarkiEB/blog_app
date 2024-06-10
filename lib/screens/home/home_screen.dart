@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:blog_app/providers/blog_provider.dart';
 import 'package:blog_app/providers/filter_provider.dart';
 import 'package:blog_app/routes/app_route.gr.dart';
-import 'package:blog_app/screens/search_blogs_screen.dart';
+import 'package:blog_app/screens/blog/search_blogs_screen.dart';
 import 'package:blog_app/widgets/card/blog_card.dart';
 import 'package:blog_app/widgets/container/search_container.dart';
 import 'package:blog_app/widgets/custom_app_bar.dart';
@@ -80,7 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           const PopularBlogsSection()
                         ],
                       )
-                    : SearchBlogsScreen(searchQuery: searchQuery),
+                    : (SearchBlogsScreen(
+                        searchQuery: searchQuery,
+                      ))
               ],
             ),
           ),

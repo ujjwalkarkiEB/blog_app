@@ -1,10 +1,13 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:blog_app/models/blog.dart';
 import 'package:blog_app/providers/blog_provider.dart';
+import 'package:blog_app/providers/user_provider.dart';
 import 'package:blog_app/utils/constants/colors.dart';
 import 'package:blog_app/widgets/container/category_container.dart';
+import 'package:blog_app/widgets/error/flasherro.dart';
 import 'package:blog_app/widgets/formfiled/custom_form_field.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +35,7 @@ class _BlogCreateScreenState extends State<BlogCreateScreen> {
   void _pickImageFrom() async {
     final ImagePicker imagePicker = ImagePicker();
     final XFile? imgFile = await imagePicker.pickImage(
-        source: ImageSource.camera,
+        source: ImageSource.gallery,
         maxHeight: 200,
         maxWidth: 200,
         imageQuality: 100);
@@ -45,34 +48,49 @@ class _BlogCreateScreenState extends State<BlogCreateScreen> {
   }
 
   void _createBlog() {
-    if (formKey.currentState!.validate()) {
-      formKey.currentState!.save();
-      if (author.isEmpty ||
-          title.isEmpty ||
-          content.isEmpty ||
-          _pickedImage == null) {
-        return;
+    try {
+      if (formKey.currentState!.validate()) {
+        formKey.currentState!.save();
+        if (title.isEmpty || content.isEmpty) {
+          throw 'No field can be empty!';
+        }
+
+        if (_pickedImage == null) {
+          throw 'Provide image to your blog!';
+        }
+        if (_selectedCategory == null) {
+          throw 'OOPS! you forgot to mention the category';
+        }
+
+        final author = context.read<UserProvider>().userData['userName'];
+
+        final blog = Blog(_selectedCategory!, _pickedImage!.path, author!, [],
+            title: title, content: content, createdAt: DateTime.now());
+
+        context.read<BlogProvider>().addBlog(blog);
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+            'Blog has been created successfully!',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green,
+          behavior: SnackBarBehavior.floating,
+          duration: Duration(seconds: 3),
+        ));
+
+        Timer(const Duration(seconds: 3), () {
+          context.router.popUntil((route) => route.isFirst);
+        });
       }
-
-      final blog = Blog(_selectedCategory!, _pickedImage!.path, author, [],
-          title: title, content: content, createdAt: DateTime.now());
-
-      context.read<BlogProvider>().addBlog(blog);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text(
-          'Blog has been created successfully!',
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.green,
-        behavior: SnackBarBehavior.floating,
-        duration: Duration(seconds: 3),
-      ));
+    } catch (e) {
+      showFlashError(context, e.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final labelStyle = Theme.of(context).textTheme.labelMedium;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Bring Your Creativity'),
@@ -117,24 +135,6 @@ class _BlogCreateScreenState extends State<BlogCreateScreen> {
                     ),
                   ),
                   CustomFormTextField(
-                    label: 'First, Introduce your name',
-                    onSaved: (val) {
-                      if (val == null) {
-                        return;
-                      }
-                      setState(() {
-                        author = val;
-                      });
-                    },
-                    validator: (p0) {
-                      if (p0!.isEmpty) {
-                        return 'Username is nont-empty field';
-                      }
-                      return null;
-                    },
-                    maxLength: 15,
-                  ),
-                  CustomFormTextField(
                     label: 'What willl be your blog called ?',
                     maxLength: 30,
                     onSaved: (val) {
@@ -155,6 +155,7 @@ class _BlogCreateScreenState extends State<BlogCreateScreen> {
                   const Gap(10),
                   CustomFormTextField(
                     label: 'Explain to the world! ',
+                    minLines: 2,
                     maxLines: 10,
                     onSaved: (val) {
                       if (val == null) {

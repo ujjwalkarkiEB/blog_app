@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:blog_app/data/data.dart';
 import 'package:blog_app/models/comment.dart';
 import 'package:blog_app/providers/blog_provider.dart';
 import 'package:blog_app/utils/constants/colors.dart';
@@ -21,6 +20,12 @@ class CommentScreen extends StatefulWidget {
 
 class _CommentScreenState extends State<CommentScreen> {
   final textController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    textController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +78,7 @@ class _CommentScreenState extends State<CommentScreen> {
                         createdAt: DateTime.now(),
                         author: 'Anonympus');
                     context.read<BlogProvider>().addComment(widget.blog, cmt);
+                    textController.clear();
                     FocusScope.of(context).unfocus();
                   },
                   icon: const Icon(

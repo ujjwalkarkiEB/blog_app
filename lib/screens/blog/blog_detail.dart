@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:blog_app/models/blog.dart';
 import 'package:blog_app/providers/blog_provider.dart';
@@ -44,7 +47,13 @@ class _BlogDetailScreenState extends State<BlogDetailScreen> {
                       backgroundColor: blog.saved ? Colors.red : Colors.green,
                     ),
                   );
+
                   provider.toggleSavedBlog(blog);
+
+                  Timer(const Duration(seconds: 4), () {
+                    context.router.pushAndPopUntil(const SavedRoute(),
+                        predicate: (route) => false);
+                  });
                 },
                 icon: Icon(
                   Icons.favorite,
@@ -101,30 +110,40 @@ class _BlogDetailScreenState extends State<BlogDetailScreen> {
                   clipBehavior: Clip.hardEdge,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
-                  child: Image.asset(
-                    blog.image,
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.fill,
+                  child: Hero(
+                    tag: blog.title,
+                    child: blog.image.startsWith('assets/')
+                        ? Image.asset(
+                            blog.image,
+                            height: 200,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.file(
+                            File(blog.image),
+                            fit: BoxFit.cover,
+                            height: 200,
+                            width: double.infinity,
+                          ),
                   ),
                 ),
                 const Gap(10),
                 // ------ content ---
-                Container(
-                    height: MediaQuery.of(context).size.height * 0.33,
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Scrollbar(
-                      radius: const Radius.circular(20),
-                      thickness: 10,
-                      child: SingleChildScrollView(
-                        controller: scrollController,
-                        child: Text(blog.content),
-                      ),
-                    )),
-                const Spacer(),
+                Expanded(
+                  child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Scrollbar(
+                        radius: const Radius.circular(20),
+                        thickness: 10,
+                        child: SingleChildScrollView(
+                          controller: scrollController,
+                          child: Text(blog.content),
+                        ),
+                      )),
+                ),
                 // ---- comment ----
                 Consumer<BlogProvider>(builder: (context, provider, child) {
                   return ListTile(

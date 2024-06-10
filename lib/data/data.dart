@@ -31,12 +31,12 @@ final List<Blog> dummyDatas = [
       Comment(
         author: 'Emily White',
         content: 'This is an interesting perspective on education trends.',
-        createdAt: DateTime.now().subtract(Duration(days: 1)),
+        createdAt: DateTime.now().subtract(const Duration(days: 1)),
       ),
       Comment(
         author: 'Michael Brown',
         content: 'Thanks for sharing!',
-        createdAt: DateTime.now().subtract(Duration(hours: 10)),
+        createdAt: DateTime.now().subtract(const Duration(hours: 10)),
       ),
     ],
     title: 'Innovations in Medical Technology',
@@ -52,7 +52,7 @@ final List<Blog> dummyDatas = [
       Comment(
         author: 'Oliver Green',
         content: 'Engineering is indeed the backbone of modern society.',
-        createdAt: DateTime.now().subtract(Duration(days: 2)),
+        createdAt: DateTime.now().subtract(const Duration(days: 2)),
       ),
     ],
     title: 'Cybersecurity in the Modern Era',
@@ -69,7 +69,7 @@ final List<Blog> dummyDatas = [
       Comment(
         author: 'Sophia Martinez',
         content: 'Medical advancements are crucial for public health.',
-        createdAt: DateTime.now().subtract(Duration(days: 3)),
+        createdAt: DateTime.now().subtract(const Duration(days: 3)),
       ),
     ],
     title: 'The Impact of Technology on Education',
@@ -85,12 +85,12 @@ final List<Blog> dummyDatas = [
       Comment(
         author: 'Emily White',
         content: 'This is an interesting perspective on education trends.',
-        createdAt: DateTime.now().subtract(Duration(days: 1)),
+        createdAt: DateTime.now().subtract(const Duration(days: 1)),
       ),
       Comment(
         author: 'Michael Brown',
         content: 'Thanks for sharing!',
-        createdAt: DateTime.now().subtract(Duration(hours: 10)),
+        createdAt: DateTime.now().subtract(const Duration(hours: 10)),
       ),
     ],
     title: 'Robotics in Engineering',
@@ -106,12 +106,12 @@ final List<Blog> dummyDatas = [
       Comment(
         author: 'Emily White',
         content: 'This is an interesting perspective on education trends.',
-        createdAt: DateTime.now().subtract(Duration(days: 1)),
+        createdAt: DateTime.now().subtract(const Duration(days: 1)),
       ),
       Comment(
         author: 'Michael Brown',
         content: 'Thanks for sharing!',
-        createdAt: DateTime.now().subtract(Duration(hours: 10)),
+        createdAt: DateTime.now().subtract(const Duration(hours: 10)),
       ),
     ],
     title: 'Telemedicine: The Future of Healthcare',

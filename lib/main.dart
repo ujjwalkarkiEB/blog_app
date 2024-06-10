@@ -1,5 +1,6 @@
 import 'package:blog_app/providers/blog_provider.dart';
 import 'package:blog_app/providers/filter_provider.dart';
+import 'package:blog_app/providers/user_provider.dart';
 import 'package:blog_app/routes/app_route.dart';
 import 'package:blog_app/utils/themes/theme.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (ctx) => FilterProvider(),
-        )
+        ),
+        ChangeNotifierProvider(create: (_) => UserProvider())
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

@@ -1,10 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
 
+import 'package:blog_app/modal/profile_modal.dart';
+import 'package:blog_app/providers/user_provider.dart';
 import 'package:blog_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -29,57 +30,53 @@ class _CustomAppBarState extends State<CustomAppBar> {
     }
   }
 
-  void getUserData() async {
-    final pref = await SharedPreferences.getInstance();
-    var userdata = pref.getString('userData');
-    if (userdata == null) {
-      return null;
-    }
-    final decodedUserData = jsonDecode(userdata);
-    setState(() {
-      userData = decodedUserData;
-    });
+  void openModal() async {
+    await showModalBottomSheet<String>(
+        context: context, builder: (ctx) => const ProfileModal());
   }
 
   @override
   Widget build(BuildContext context) {
-    getUserData();
     final currentTime = TimeOfDay.now();
     final greeting = getGreeting(currentTime);
+    final userData = context.watch<UserProvider>().userData;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 8, 10, 0),
       child: AppBar(
-        backgroundColor: AppColor.appBackgroundColor,
-        title: Row(
-          children: [
-            const CircleAvatar(
-              radius: 25,
-              backgroundImage: AssetImage("assets/images/add/user_image.png"),
-            ),
-            const Gap(10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          backgroundColor: AppColor.appBackgroundColor,
+          title: Consumer<UserProvider>(builder: (context, provider, child) {
+            return Row(
               children: [
-                Text(
-                  greeting,
-                  style: Theme.of(context).textTheme.titleSmall,
+                CircleAvatar(
+                  backgroundImage: userData['image']!.startsWith('assets/')
+                      ? const AssetImage("assets/images/add/user_image.png")
+                      : FileImage(File(userData['image'] as String))
+                          as ImageProvider,
                 ),
-                Text(
-                  userData == null
-                      ? 'Anonymous '
-                      : userData!['userName'] as String,
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelMedium!
-                      .apply(color: Colors.orange),
-                )
+                const Gap(10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      greeting,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    Text(
+                      userData['userName'].toString().toUpperCase(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelMedium!
+                          .apply(color: Colors.orange),
+                    )
+                  ],
+                ),
               ],
-            ),
-          ],
-        ),
-        actions: const [Icon(Icons.notifications)],
-      ),
+            );
+          }),
+          actions: [
+            IconButton(onPressed: openModal, icon: const Icon(Icons.edit))
+          ]),
     );
   }
 }

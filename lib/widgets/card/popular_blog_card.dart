@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:blog_app/models/blog.dart';
 import 'package:blog_app/routes/app_route.gr.dart';
@@ -63,10 +65,17 @@ class PopularBlogCard extends StatelessWidget {
         width: 80,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
-          child: Image.asset(
-            blog.image,
-            fit: BoxFit.cover,
-          ),
+          child: blog.image.startsWith('assets/')
+              ? Image.asset(
+                  blog.image,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                )
+              : Image.file(
+                  File(blog.image),
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
         ),
       ),
     );

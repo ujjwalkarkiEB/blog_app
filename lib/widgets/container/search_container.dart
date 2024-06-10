@@ -117,7 +117,6 @@ class _SearchContainerState extends State<SearchContainer> {
 
   @override
   Widget build(BuildContext context) {
-    print('a: ${widget.showFilter}');
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),

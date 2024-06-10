@@ -8,8 +8,11 @@ import 'package:intl/intl.dart';
 final dateformatter = DateFormat();
 
 class SavedBlogCard extends StatelessWidget {
-  const SavedBlogCard(
-      {super.key, required this.blog, required this.showFavStatus});
+  const SavedBlogCard({
+    super.key,
+    required this.blog,
+    required this.showFavStatus,
+  });
   final bool showFavStatus;
   final Blog blog;
 
@@ -34,16 +37,16 @@ class SavedBlogCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    category.name,
+                    category.name.toUpperCase(),
                     style: TextStyle(
-                      color: categoryColors[category],
-                    ),
+                        color: categoryColors[category],
+                        fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     width: 280,
                     child: Text(
                       title,
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(context).textTheme.labelMedium,
                     ),
                   ),
                   Row(
@@ -66,7 +69,7 @@ class SavedBlogCard extends StatelessWidget {
                       color: Colors.orange,
                       size: 30,
                     )
-                  : Text(''),
+                  : const Text(''),
             ],
           ),
         ),

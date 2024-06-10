@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:blog_app/models/blog.dart';
 import 'package:blog_app/routes/app_route.gr.dart';
@@ -34,9 +36,8 @@ class BlogCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.4),
-                offset: const Offset(0, 2),
-                blurRadius: 50,
-                spreadRadius: 1,
+                offset: const Offset(4, 4),
+                blurRadius: 16,
               )
             ]),
         child: Column(
@@ -53,10 +54,19 @@ class BlogCard extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      blog.image,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+                    child: Hero(
+                      tag: blog.title,
+                      child: blog.image.startsWith('assets/')
+                          ? Image.asset(
+                              blog.image,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            )
+                          : Image.file(
+                              File(blog.image),
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            ),
                     ),
                   ),
                   Positioned(

@@ -12,16 +12,21 @@ class AppRouter extends $AppRouter {
           path: '/',
           page: MainRoute.page,
           children: [
-            AutoRoute(page: HomeNavigationRoute.page, children: [
-              AutoRoute(initial: true, page: HomeRoute.page),
-              AutoRoute(page: BlogCreateRoute.page),
-            ]),
+            AutoRoute(
+                page: HomeNavigationRoute.page,
+                maintainState: false,
+                children: [
+                  AutoRoute(
+                    initial: true,
+                    page: HomeRoute.page,
+                  ),
+                  AutoRoute(page: BlogCreateRoute.page),
+                ]),
             AutoRoute(page: SavedRoute.page),
-            AutoRoute(page: ProfileRoute.page),
+            AutoRoute(page: YourBlogListRoute.page),
           ],
         ),
         AutoRoute(page: BlogDetailRoute.page),
         AutoRoute(page: CommentRoute.page),
-        // AutoRoute(page: AllBlogsRoute.page),
       ];
 }

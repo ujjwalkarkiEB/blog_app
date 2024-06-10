@@ -1,6 +1,5 @@
 import 'package:blog_app/models/comment.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 
 class CommentContainer extends StatelessWidget {
@@ -17,7 +16,7 @@ class CommentContainer extends StatelessWidget {
             leading: const CircleAvatar(
                 backgroundImage:
                     AssetImage('assets/images/add/user_image.png')),
-            title: Text(comment.author ?? 'Anonymous'),
+            title: Text(comment.author),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

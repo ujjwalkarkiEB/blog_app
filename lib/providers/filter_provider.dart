@@ -11,5 +11,6 @@ class FilterProvider extends ChangeNotifier {
 
   void resetFilter() {
     activefilters.clear();
+    notifyListeners();
   }
 }

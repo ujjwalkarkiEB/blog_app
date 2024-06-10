@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class HomeNavigationScreen extends StatelessWidget {
-  const HomeNavigationScreen({super.key, required this.navigatorKey});
-  final GlobalKey<NavigatorState> navigatorKey;
+  const HomeNavigationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AutoRouter(
-      key: navigatorKey,
-    );
+    return const AutoRouter();
   }
 }

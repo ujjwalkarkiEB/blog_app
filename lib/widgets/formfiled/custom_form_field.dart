@@ -9,10 +9,12 @@ class CustomFormTextField extends StatelessWidget {
     this.maxLength,
     required this.onSaved,
     this.validator,
+    this.minLines,
   });
   final String label;
   final int? maxLines;
   final int? maxLength;
+  final int? minLines;
 
   final void Function(String?) onSaved;
   final String? Function(String?)? validator;
@@ -38,6 +40,7 @@ class CustomFormTextField extends StatelessWidget {
             child: TextFormField(
               maxLines: maxLines,
               maxLength: maxLength,
+              minLines: minLines,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),

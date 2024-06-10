@@ -7,7 +7,6 @@ import '../models/blog.dart';
 class BlogProvider extends ChangeNotifier {
   List<Blog> blogs = dummyDatas;
   List<Blog> savedBlogs = [];
-
   List<Blog> get getBlogs => blogs;
 
   void addBlog(Blog blog) {
@@ -86,5 +85,16 @@ class BlogProvider extends ChangeNotifier {
 
     blog.saved = !(blog.saved);
     notifyListeners();
+  }
+
+  List<Blog> getAuthorBlogList(String author) {
+    return blogs.where((blog) => blog.author == author).toList();
+  }
+
+  void deleteBlog(Blog blog, String author) {
+    if (blog.author == author) {
+      blogs.remove(blog);
+      notifyListeners();
+    }
   }
 }
