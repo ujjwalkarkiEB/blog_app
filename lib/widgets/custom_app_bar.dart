@@ -46,6 +46,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
       child: AppBar(
           backgroundColor: AppColor.appBackgroundColor,
           title: Consumer<UserProvider>(builder: (context, provider, child) {
+            print('rebuilded appbar');
+            print(
+                'usernmae: ${userData['userName']}   image:${userData['image']} ');
             return Row(
               children: [
                 CircleAvatar(

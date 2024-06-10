@@ -31,13 +31,16 @@ class _ProfileModalState extends State<ProfileModal> {
   }
 
   void save() async {
+    final provider = context.read<UserProvider>();
+    final userData = provider.userData;
+
 // first save to local storage
     final pref = await SharedPreferences.getInstance();
     Map<String, String> data = {
-      "userName": textController.text,
-      "image": _pickedImage == null
-          ? 'assets/images/add/user_image.png'
-          : _pickedImage!.path,
+      "userName": textController.text.isEmpty
+          ? userData['userName']
+          : textController.text,
+      "image": _pickedImage == null ? userData['image'] : _pickedImage!.path,
     };
     String encodedMap = jsonEncode(data);
     pref.setString('userData', encodedMap);
@@ -46,7 +49,6 @@ class _ProfileModalState extends State<ProfileModal> {
     if (!mounted) {
       return;
     }
-    final provider = context.read<UserProvider>();
     if (_pickedImage == null && textController.text.isNotEmpty) {
       provider.setNameOnly(textController.text);
       return;

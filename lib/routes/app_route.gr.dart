@@ -15,7 +15,7 @@ import 'package:blog_app/screens/blog/blog_detail.dart' as _i2;
 import 'package:blog_app/screens/blog/comment_screen.dart' as _i3;
 import 'package:blog_app/screens/blog/your_blog_list.dart' as _i11;
 import 'package:blog_app/screens/home/home_screen.dart' as _i5;
-import 'package:blog_app/screens/home_navigation.dart' as _i4;
+import 'package:blog_app/screens/home/home_navigation.dart' as _i4;
 import 'package:blog_app/screens/main_screen.dart' as _i6;
 import 'package:blog_app/screens/onboarding_screen.dart' as _i7;
 import 'package:blog_app/screens/profile/profile_screen.dart' as _i8;

@@ -8,11 +8,13 @@ final List<Blog> dummyDatas = [
     'Carol White',
     [
       Comment(
+        "assets/images/add/user_image.png",
         author: 'John Doe',
         content: 'Great insights on AI!',
         createdAt: DateTime.now().subtract(const Duration(days: 5)),
       ),
       Comment(
+        "assets/images/add/user_image.png",
         author: 'Jane Smith',
         content: 'I learned a lot from this post.',
         createdAt: DateTime.now().subtract(const Duration(days: 3)),
@@ -29,11 +31,13 @@ final List<Blog> dummyDatas = [
     'David Brown',
     [
       Comment(
+        "assets/images/add/user_image.png",
         author: 'Emily White',
         content: 'This is an interesting perspective on education trends.',
         createdAt: DateTime.now().subtract(const Duration(days: 1)),
       ),
       Comment(
+        "assets/images/add/user_image.png",
         author: 'Michael Brown',
         content: 'Thanks for sharing!',
         createdAt: DateTime.now().subtract(const Duration(hours: 10)),
@@ -50,6 +54,7 @@ final List<Blog> dummyDatas = [
     'Eva Green',
     [
       Comment(
+        "assets/images/add/user_image.png",
         author: 'Oliver Green',
         content: 'Engineering is indeed the backbone of modern society.',
         createdAt: DateTime.now().subtract(const Duration(days: 2)),
@@ -67,6 +72,7 @@ final List<Blog> dummyDatas = [
     'Frank Harris',
     [
       Comment(
+        "assets/images/add/user_image.png",
         author: 'Sophia Martinez',
         content: 'Medical advancements are crucial for public health.',
         createdAt: DateTime.now().subtract(const Duration(days: 3)),
@@ -83,11 +89,13 @@ final List<Blog> dummyDatas = [
     'Grace Lee',
     [
       Comment(
+        "assets/images/add/user_image.png",
         author: 'Emily White',
         content: 'This is an interesting perspective on education trends.',
         createdAt: DateTime.now().subtract(const Duration(days: 1)),
       ),
       Comment(
+        "assets/images/add/user_image.png",
         author: 'Michael Brown',
         content: 'Thanks for sharing!',
         createdAt: DateTime.now().subtract(const Duration(hours: 10)),
@@ -104,11 +112,13 @@ final List<Blog> dummyDatas = [
     'Henry Wilson',
     [
       Comment(
+        "assets/images/add/user_image.png",
         author: 'Emily White',
         content: 'This is an interesting perspective on education trends.',
         createdAt: DateTime.now().subtract(const Duration(days: 1)),
       ),
       Comment(
+        "assets/images/add/user_image.png",
         author: 'Michael Brown',
         content: 'Thanks for sharing!',
         createdAt: DateTime.now().subtract(const Duration(hours: 10)),

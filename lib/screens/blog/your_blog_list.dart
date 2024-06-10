@@ -16,7 +16,10 @@ class YourBlogListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Blogs '),
+        title: Text(
+          'Your Blogs',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
         backgroundColor: AppColor.appBackgroundColor,
       ),
       body: Consumer2<BlogProvider, UserProvider>(

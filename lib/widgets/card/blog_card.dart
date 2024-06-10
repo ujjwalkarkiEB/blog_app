@@ -44,7 +44,7 @@ class BlogCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ------image/category---
+            // -----------   card [image/category/attributes]  -----------
             Container(
               height: 150,
               decoration: BoxDecoration(
@@ -88,20 +88,24 @@ class BlogCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
+                    // --title--
                     Text(
                       title,
                       style: Theme.of(context).textTheme.titleSmall,
                       maxLines: 2,
                     ),
                     const Spacer(),
+                    // ----- content -----
                     Text(
                       subtitle,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const Gap(10),
+                    // --------- Row(POSTDATE/COMMENTS) -------
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // ----- post date -----
                         Row(
                           children: [
                             const Icon(
@@ -117,6 +121,7 @@ class BlogCard extends StatelessWidget {
                             )
                           ],
                         ),
+                        // --- comments ------
                         Row(
                           children: [
                             const Icon(

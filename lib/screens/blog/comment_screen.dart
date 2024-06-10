@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:blog_app/models/comment.dart';
 import 'package:blog_app/providers/blog_provider.dart';
+import 'package:blog_app/providers/user_provider.dart';
 import 'package:blog_app/utils/constants/colors.dart';
 import 'package:blog_app/widgets/container/comment_container.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ class _CommentScreenState extends State<CommentScreen> {
               }),
             ),
             const Gap(20),
+            // ------- comment section ------
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20), color: Colors.white),
@@ -73,10 +75,11 @@ class _CommentScreenState extends State<CommentScreen> {
                 ),
                 trailing: IconButton(
                   onPressed: () {
-                    final cmt = Comment(
+                    final userData = context.read<UserProvider>().userData;
+                    final cmt = Comment(userData['image'],
                         content: textController.text,
                         createdAt: DateTime.now(),
-                        author: 'Anonympus');
+                        author: userData['userName']);
                     context.read<BlogProvider>().addComment(widget.blog, cmt);
                     textController.clear();
                     FocusScope.of(context).unfocus();
