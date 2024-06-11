@@ -20,7 +20,7 @@ final List<Blog> dummyDatas = [
         createdAt: DateTime.now().subtract(const Duration(days: 3)),
       ),
     ],
-    title: 'The Power Of Blockchain',
+    title: 'The Power Of Blockchain In Civil',
     content:
         'Recent advancements in civil engineering are paving the way for more sustainable and efficient infrastructure adasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdadasdasdas. Innovations in materials, such as self-healing concrete and carbon fiber reinforcement, are enhancing the durability and longevity of structures. The use of Building Information Modeling (BIM) and other digital tools is improving project planning and execution. These technologies enable engineers to design and construct buildings and infrastructure that are more resilient to environmental challenges. As the world faces increasing urbanization and climate change, civil engineering will play a critical role in developing solutions to these global issues.',
     createdAt: DateTime(2024, 06, 6, 13),

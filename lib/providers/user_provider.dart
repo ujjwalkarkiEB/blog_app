@@ -8,7 +8,6 @@ class UserProvider extends ChangeNotifier {
 
   void setUserData(Map<String, dynamic> data) {
     userData = data;
-    print('userdara: $userData');
     notifyListeners();
   }
 
