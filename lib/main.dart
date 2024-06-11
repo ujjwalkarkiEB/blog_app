@@ -1,3 +1,4 @@
+import 'package:blog_app/providers/authentication_provider.dart';
 import 'package:blog_app/providers/blog_provider.dart';
 import 'package:blog_app/providers/filter_provider.dart';
 import 'package:blog_app/providers/user_provider.dart';
@@ -17,13 +18,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider(create: (_) => AuthenticationProvider()),
         ChangeNotifierProvider(
           create: (ctx) => BlogProvider(),
         ),
         ChangeNotifierProvider(
           create: (ctx) => FilterProvider(),
         ),
-        ChangeNotifierProvider(create: (_) => UserProvider())
+        Provider(create: (_) => UserProvider()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

@@ -3,13 +3,14 @@ import 'package:blog_app/models/comment.dart';
 import 'package:flutter/material.dart';
 
 import '../models/blog.dart';
+import '../models/user.dart';
 
 class BlogProvider extends ChangeNotifier {
   List<Blog> blogs = dummyDatas;
-  List<Blog> savedBlogs = [];
   List<Blog> get getBlogs => blogs;
 
-  void addBlog(Blog blog) {
+  void addBlog(Blog blog, User user) {
+    user.createdBlogs.add(blog);
     blogs.add(blog);
     notifyListeners();
   }
@@ -50,17 +51,17 @@ class BlogProvider extends ChangeNotifier {
       final filteredBlogs =
           blogs.where((blog) => filter.contains(blog.category)).toList();
       // sort filtered blogs based on comments
-      filteredBlogs.sort((blog2, blog1) {
-        final blog1CommentCount = blog1.coments.length;
-        final blog2CommentCount = blog2.coments.length;
-        return blog2CommentCount.compareTo(blog1CommentCount);
+      filteredBlogs.sort((blog1, blog2) {
+        final blog1LikeCount = blog1.likes;
+        final blog2LikeCount = blog2.likes;
+        return blog2LikeCount.compareTo(blog1LikeCount);
       });
       return filteredBlogs;
     }
-    filteredBlogs.sort((blog2, blog1) {
-      final blog1CommentCount = blog1.coments.length;
-      final blog2CommentCount = blog2.coments.length;
-      return blog2CommentCount.compareTo(blog1CommentCount);
+    filteredBlogs.sort((blog1, blog2) {
+      final blog1LikeCount = blog1.likes;
+      final blog2LikeCount = blog2.likes;
+      return blog2LikeCount.compareTo(blog1LikeCount);
     });
     return filteredBlogs;
   }
@@ -76,15 +77,26 @@ class BlogProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleSavedBlog(Blog blog) {
-    if (!blog.saved && !savedBlogs.contains(blog)) {
-      savedBlogs.add(blog);
+  void toggleSavedBlog(Blog blog, User user) {
+    final isLikedBlogs = user.likedBlogs.contains(blog);
+    if (isLikedBlogs) {
+      if (user.likedBlogs.isNotEmpty) {
+        blog.likes -= 1;
+        user.likedBlogs.remove(blog);
+      }
     } else {
-      savedBlogs.remove(blog);
-    }
+      blog.likes += 1;
 
-    blog.saved = !(blog.saved);
+      user.likedBlogs.add(blog);
+    }
     notifyListeners();
+  }
+
+  bool checkIfBlogIsLiked(Blog blog, User user) {
+    if (user.likedBlogs.contains(blog)) {
+      return true;
+    }
+    return false;
   }
 
   List<Blog> getAuthorBlogList(String author) {

@@ -1,23 +1,17 @@
-import 'package:flutter/material.dart';
+import '../models/user.dart';
 
-class UserProvider extends ChangeNotifier {
-  Map<String, dynamic> userData = {
-    'userName': 'anonymous',
-    'image': 'assets/images/add/user_image.png'
-  };
+class UserProvider {
+  User userInfo = User(
+      email: 'ujwal@gmail.com',
+      name: 'ujjwal',
+      password: '123456789',
+      profileImg: "assets/images/add/user_image.png",
+      authenticatedState: true,
+      registered: true);
 
-  void setUserData(Map<String, dynamic> data) {
-    userData = data;
-    notifyListeners();
+  void setUser(User user) {
+    userInfo = user;
   }
 
-  void setNameOnly(String name) {
-    userData['userName'] = name;
-    notifyListeners();
-  }
-
-  void setProfileImageOnly(String name) {
-    userData['image'] = name;
-    notifyListeners();
-  }
+  // can add functions to change username/img with notifiers
 }

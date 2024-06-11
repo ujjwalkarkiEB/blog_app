@@ -1,7 +1,9 @@
 import 'dart:io';
 
-import 'package:blog_app/modal/profile_modal.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:blog_app/providers/authentication_provider.dart';
 import 'package:blog_app/providers/user_provider.dart';
+import 'package:blog_app/routes/app_route.gr.dart';
 import 'package:blog_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -30,32 +32,24 @@ class _CustomAppBarState extends State<CustomAppBar> {
     }
   }
 
-  void openModal() async {
-    await showModalBottomSheet<String>(
-        context: context, builder: (ctx) => const ProfileModal());
-  }
-
   @override
   Widget build(BuildContext context) {
     final currentTime = TimeOfDay.now();
     final greeting = getGreeting(currentTime);
-    final userData = context.watch<UserProvider>().userData;
+    final userInfo = context.watch<UserProvider>().userInfo;
+    final authenticator = context.read<AuthenticationProvider>();
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 8, 10, 0),
       child: AppBar(
           backgroundColor: AppColor.appBackgroundColor,
           title: Consumer<UserProvider>(builder: (context, provider, child) {
-            print('rebuilded appbar');
-            print(
-                'usernmae: ${userData['userName']}   image:${userData['image']} ');
             return Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: userData['image']!.startsWith('assets/')
+                  backgroundImage: userInfo.profileImg.startsWith('assets/')
                       ? const AssetImage("assets/images/add/user_image.png")
-                      : FileImage(File(userData['image'] as String))
-                          as ImageProvider,
+                      : FileImage(File(userInfo.profileImg)) as ImageProvider,
                 ),
                 const Gap(10),
                 Column(
@@ -66,7 +60,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                     Text(
-                      userData['userName'].toString().toUpperCase(),
+                      userInfo.name.toUpperCase(),
                       style: Theme.of(context)
                           .textTheme
                           .labelMedium!
@@ -78,7 +72,15 @@ class _CustomAppBarState extends State<CustomAppBar> {
             );
           }),
           actions: [
-            IconButton(onPressed: openModal, icon: const Icon(Icons.edit))
+            IconButton(
+                onPressed: () {
+                  authenticator.logoutUser(userInfo);
+                  if (userInfo.authenticatedState) {
+                    context.router.pushAndPopUntil(const AuthenticationRoute(),
+                        predicate: (r) => false);
+                  }
+                },
+                icon: const Icon(Icons.logout))
           ]),
     );
   }

@@ -52,6 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           const Gap(10),
                           const LatestBlogsSection(),
                           const Gap(20),
+
+                          // ------- popular blog ------
                           Row(
                             children: [
                               const Flexible(

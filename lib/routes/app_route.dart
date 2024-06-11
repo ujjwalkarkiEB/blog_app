@@ -7,9 +7,10 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: SplashRoute.page, initial: true),
-        AutoRoute(page: OnboardingRoute.page),
+        AutoRoute(path: '/', page: OnboardingRoute.page),
+        AutoRoute(path: '/auth', page: AuthenticationRoute.page),
         AutoRoute(
-          path: '/',
+          path: '/main',
           page: MainRoute.page,
           children: [
             AutoRoute(
@@ -24,6 +25,7 @@ class AppRouter extends $AppRouter {
                 ]),
             AutoRoute(page: SavedRoute.page),
             AutoRoute(page: YourBlogListRoute.page),
+            AutoRoute(page: ProfileRoute.page),
           ],
         ),
         AutoRoute(page: BlogDetailRoute.page),

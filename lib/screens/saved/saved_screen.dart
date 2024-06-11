@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:blog_app/providers/blog_provider.dart';
+import 'package:blog_app/providers/user_provider.dart';
 import 'package:blog_app/utils/constants/colors.dart';
 import 'package:blog_app/widgets/card/saved_blog_card.dart';
 import 'package:blog_app/widgets/text/empty_text.dart';
@@ -20,8 +20,8 @@ class SavedScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
-      body: Consumer<BlogProvider>(builder: (context, provider, child) {
-        final savelist = provider.savedBlogs;
+      body: Consumer<UserProvider>(builder: (context, provider, child) {
+        final savelist = provider.userInfo.likedBlogs;
         if (savelist.isEmpty) {
           return const Center(
               child: EmptyText(

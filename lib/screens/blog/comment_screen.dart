@@ -75,11 +75,11 @@ class _CommentScreenState extends State<CommentScreen> {
                 ),
                 trailing: IconButton(
                   onPressed: () {
-                    final userData = context.read<UserProvider>().userData;
-                    final cmt = Comment(userData['image'],
+                    final userData = context.read<UserProvider>().userInfo;
+                    final cmt = Comment(
                         content: textController.text,
                         createdAt: DateTime.now(),
-                        author: userData['userName']);
+                        author: userData.name);
                     context.read<BlogProvider>().addComment(widget.blog, cmt);
                     textController.clear();
                     FocusScope.of(context).unfocus();

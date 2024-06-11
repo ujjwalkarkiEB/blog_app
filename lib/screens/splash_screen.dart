@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isVisit == null || !isVisit) {
       context.replaceRoute(const OnboardingRoute());
     } else {
-      context.replaceRoute(const MainRoute());
+      context.replaceRoute(const AuthenticationRoute());
     }
   }
 

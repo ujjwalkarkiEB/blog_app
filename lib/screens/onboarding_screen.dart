@@ -16,7 +16,6 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  var username = '';
   void _getStarted() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('onBoardVisit', true);
@@ -24,15 +23,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     if (!mounted) {
       return;
     }
-    context.router.replace(const MainRoute());
-  }
-
-  void openModal() async {
-    final user = await showModalBottomSheet<String>(
-        context: context, builder: (ctx) => const ProfileModal());
-    setState(() {
-      username = user!;
-    });
+    context.router.replace(const AuthenticationRoute());
   }
 
   @override
@@ -61,13 +52,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           const Text('Get the latest articles and updates everyday and'),
           const Text('add your trusted knowledge with us'),
           const Gap(15),
-          TextButton(
-              onPressed: openModal, child: const Text('Set your profile')),
+          // TextButton(
+          //     onPressed: openModal, child: const Text('Set your profile')),
           ElevatedButton(
             onPressed: _getStarted,
-            child: Text(
-              'Get Started ${username.toUpperCase()}',
-              style: const TextStyle(fontWeight: FontWeight.bold),
+            child: const Text(
+              'Get Started',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ],

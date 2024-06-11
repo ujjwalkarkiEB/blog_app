@@ -24,9 +24,9 @@ class YourBlogListScreen extends StatelessWidget {
       ),
       body: Consumer2<BlogProvider, UserProvider>(
           builder: (context, blog, user, child) {
-        final author = user.userData['userName'];
+        final author = user.userInfo.name;
 
-        final blogs = blog.getAuthorBlogList(author!);
+        final blogs = blog.getAuthorBlogList(author);
         if (blogs.isEmpty) {
           return const Center(
               child: EmptyText(title: 'Currently You haveno blogs yet!'));

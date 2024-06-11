@@ -14,11 +14,9 @@ class CommentContainer extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
-            leading: CircleAvatar(
-              backgroundImage: comment.userImg.startsWith('assets/')
-                  ? AssetImage(comment.userImg)
-                  : FileImage(File(comment.userImg)),
-            ),
+            leading: const CircleAvatar(
+                backgroundImage:
+                    AssetImage('assets/images/add/user_image.png')),
             title: Text(comment.author),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

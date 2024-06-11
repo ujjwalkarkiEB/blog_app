@@ -19,7 +19,7 @@ class Blog {
   final String title;
   final String content;
   final DateTime createdAt;
-  bool saved;
+  int likes;
   final BlogCategory category;
   final String image;
   final String author;
@@ -29,7 +29,7 @@ class Blog {
       {required this.title,
       required this.content,
       required this.createdAt,
-      this.saved = false});
+      this.likes = 0});
 
   String get getTitle => 'blog title: $title';
 }

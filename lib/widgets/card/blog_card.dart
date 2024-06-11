@@ -22,6 +22,7 @@ class BlogCard extends StatelessWidget {
     final subtitle = blog.content;
     final comments = blog.coments.length;
     final category = blog.category;
+    final likesCount = blog.likes;
 
     return InkWell(
       onTap: () {
@@ -121,6 +122,20 @@ class BlogCard extends StatelessWidget {
                             )
                           ],
                         ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.favorite,
+                              color: Colors.orange,
+                            ),
+                            Text(
+                              '  ${likesCount.toString()}',
+                              style: const TextStyle(
+                                  color: Colors.orange, fontSize: 10),
+                            ),
+                          ],
+                        ),
+
                         // --- comments ------
                         Row(
                           children: [
@@ -133,10 +148,6 @@ class BlogCard extends StatelessWidget {
                               style: const TextStyle(
                                   color: Colors.orange, fontSize: 10),
                             ),
-                            const Text(
-                              ' comments ',
-                              style: TextStyle(color: Colors.orange),
-                            )
                           ],
                         )
                       ],

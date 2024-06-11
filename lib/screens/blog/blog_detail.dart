@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:blog_app/models/blog.dart';
 import 'package:blog_app/providers/blog_provider.dart';
+import 'package:blog_app/providers/user_provider.dart';
 import 'package:blog_app/routes/app_route.gr.dart';
 import 'package:blog_app/utils/constants/colors.dart';
 import 'package:blog_app/utils/helpers/post_date.dart';
@@ -32,33 +33,38 @@ class _BlogDetailScreenState extends State<BlogDetailScreen> {
       appBar: AppBar(
         backgroundColor: AppColor.appBackgroundColor,
         actions: [
-          Consumer<BlogProvider>(builder: (context, provider, child) {
+          Consumer2<BlogProvider, UserProvider>(
+              builder: (context, provider, up, child) {
+            final isLiked = provider.checkIfBlogIsLiked(blog, up.userInfo);
             return IconButton(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       duration: const Duration(seconds: 3),
                       content: Text(
-                        blog.saved
+                        isLiked
                             ? 'Removed From You Savelist!'
                             : 'Saved to your list',
                         style: const TextStyle(color: Colors.white),
                       ),
-                      backgroundColor: blog.saved ? Colors.red : Colors.green,
+                      backgroundColor: isLiked ? Colors.red : Colors.green,
                     ),
                   );
 
-                  provider.toggleSavedBlog(blog);
+                  provider.toggleSavedBlog(blog, up.userInfo);
 
                   Timer(const Duration(seconds: 4), () {
-                    context.router.pushAndPopUntil(const SavedRoute(),
+                    context.router.pushAndPopUntil(
+                        MainRoute(
+                            user: context.read<UserProvider>().userInfo,
+                            children: const [SavedRoute()]),
                         predicate: (route) => false);
                   });
                 },
                 icon: Icon(
                   Icons.favorite,
                   size: 30,
-                  color: blog.saved ? Colors.orange : Colors.grey,
+                  color: isLiked ? Colors.orange : Colors.grey,
                 ));
           })
         ],

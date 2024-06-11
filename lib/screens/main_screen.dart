@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:blog_app/providers/user_provider.dart';
 import 'package:blog_app/routes/app_route.gr.dart';
@@ -7,28 +5,21 @@ import 'package:blog_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/user.dart';
 
 @RoutePage()
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  const MainScreen({super.key, required this.user});
+  final User user;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  void getUserData() async {
-    final pref = await SharedPreferences.getInstance();
-    var userdata = pref.getString('userData');
-    if (userdata == null) {
-      return null;
-    }
-    final Map<String, dynamic> decodedUserData = jsonDecode(userdata);
-    if (!mounted) {
-      return;
-    }
-    context.read<UserProvider>().setUserData(decodedUserData);
+  void getUserData() {
+    context.read<UserProvider>().setUser(widget.user);
   }
 
   @override
@@ -44,6 +35,7 @@ class _MainScreenState extends State<MainScreen> {
         HomeNavigationRoute(),
         SavedRoute(),
         YourBlogListRoute(),
+        ProfileRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavigationBar(
@@ -68,6 +60,8 @@ class _MainScreenState extends State<MainScreen> {
                 label: 'Saved', icon: Icon(Icons.favorite_outlined)),
             BottomNavigationBarItem(
                 label: 'Your Blogs', icon: Icon(Iconsax.user_octagon4)),
+            BottomNavigationBarItem(
+                label: 'Profile', icon: Icon(Iconsax.profile_2user)),
           ],
         );
       },

@@ -7,7 +7,7 @@ import 'package:blog_app/providers/blog_provider.dart';
 import 'package:blog_app/providers/user_provider.dart';
 import 'package:blog_app/utils/constants/colors.dart';
 import 'package:blog_app/widgets/container/category_container.dart';
-import 'package:blog_app/widgets/error/flasherro.dart';
+import 'package:blog_app/widgets/snackbar/error/flasherro.dart';
 import 'package:blog_app/widgets/formfiled/custom_form_field.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -62,12 +62,12 @@ class _BlogCreateScreenState extends State<BlogCreateScreen> {
           throw 'OOPS! you forgot to mention the category';
         }
 
-        final author = context.read<UserProvider>().userData['userName'];
+        final user = context.read<UserProvider>().userInfo;
 
-        final blog = Blog(_selectedCategory!, _pickedImage!.path, author!, [],
+        final blog = Blog(_selectedCategory!, _pickedImage!.path, user.name, [],
             title: title, content: content, createdAt: DateTime.now());
 
-        context.read<BlogProvider>().addBlog(blog);
+        context.read<BlogProvider>().addBlog(blog, user);
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
             'Blog has been created successfully!',

@@ -3,18 +3,17 @@ import '../models/comment.dart';
 
 final List<Blog> dummyDatas = [
   Blog(
+    likes: 20,
     BlogCategory.engineering,
     'assets/images/blogs/blog5.png',
     'Carol White',
     [
       Comment(
-        "assets/images/add/user_image.png",
         author: 'John Doe',
         content: 'Great insights on AI!',
         createdAt: DateTime.now().subtract(const Duration(days: 5)),
       ),
       Comment(
-        "assets/images/add/user_image.png",
         author: 'Jane Smith',
         content: 'I learned a lot from this post.',
         createdAt: DateTime.now().subtract(const Duration(days: 3)),
@@ -26,18 +25,17 @@ final List<Blog> dummyDatas = [
     createdAt: DateTime(2024, 06, 6, 13),
   ),
   Blog(
+    likes: 2,
     BlogCategory.medical,
     'assets/images/blogs/blog2.jpeg',
     'David Brown',
     [
       Comment(
-        "assets/images/add/user_image.png",
         author: 'Emily White',
         content: 'This is an interesting perspective on education trends.',
         createdAt: DateTime.now().subtract(const Duration(days: 1)),
       ),
       Comment(
-        "assets/images/add/user_image.png",
         author: 'Michael Brown',
         content: 'Thanks for sharing!',
         createdAt: DateTime.now().subtract(const Duration(hours: 10)),
@@ -46,15 +44,15 @@ final List<Blog> dummyDatas = [
     title: 'Innovations in Medical Technology',
     content:
         'The medical field is being revolutionized by new technologies, from telemedicine to advanced diagnostic tools. Wearable devices and remote monitoring systems are enabling patients to manage their health more effectively. Artificial intelligence is being used to analyze medical data and provide personalized treatment recommendations. These innovations are improving patient outcomes and making healthcare more accessible. However, the rapid pace of technological change also presents challenges, including ensuring data privacy and security. Ongoing research and collaboration are key to addressing these issues and maximizing the benefits of medical technology.',
-    createdAt: DateTime(2024, 6, 3),
+    createdAt: DateTime(2024, 6, 7),
   ),
   Blog(
+    likes: 35,
     BlogCategory.technology,
     'assets/images/blogs/blog4.jpeg',
     'Eva Green',
     [
       Comment(
-        "assets/images/add/user_image.png",
         author: 'Oliver Green',
         content: 'Engineering is indeed the backbone of modern society.',
         createdAt: DateTime.now().subtract(const Duration(days: 2)),
@@ -64,15 +62,14 @@ final List<Blog> dummyDatas = [
     content:
         'As technology advances, so do the threats in cybersecurity. Cyberattacks are becoming more sophisticated, targeting individuals, organizations, and even nations. It is crucial to develop robust cybersecurity measures to protect sensitive data and systems. This includes implementing strong encryption, multi-factor authentication, and regular security audits. Additionally, there is a growing need for cybersecurity professionals to stay ahead of emerging threats. Education and awareness are also vital in promoting good cybersecurity practices among users. By taking a proactive approach, we can mitigate the risks and safeguard our digital assets.',
     createdAt: DateTime(2024, 5, 30),
-    saved: true,
   ),
   Blog(
+    likes: 13,
     BlogCategory.education,
     'assets/images/blogs/blog5.png',
     'Frank Harris',
     [
       Comment(
-        "assets/images/add/user_image.png",
         author: 'Sophia Martinez',
         content: 'Medical advancements are crucial for public health.',
         createdAt: DateTime.now().subtract(const Duration(days: 3)),
@@ -84,18 +81,17 @@ final List<Blog> dummyDatas = [
     createdAt: DateTime(2023, 1, 20),
   ),
   Blog(
+    likes: 22,
     BlogCategory.engineering,
     'assets/images/blogs/blog6.jpeg',
     'Grace Lee',
     [
       Comment(
-        "assets/images/add/user_image.png",
         author: 'Emily White',
         content: 'This is an interesting perspective on education trends.',
         createdAt: DateTime.now().subtract(const Duration(days: 1)),
       ),
       Comment(
-        "assets/images/add/user_image.png",
         author: 'Michael Brown',
         content: 'Thanks for sharing!',
         createdAt: DateTime.now().subtract(const Duration(hours: 10)),
@@ -104,21 +100,20 @@ final List<Blog> dummyDatas = [
     title: 'Robotics in Engineering',
     content:
         'The integration of robotics in engineering is transforming the industry. Robots are being used in manufacturing, construction, and other sectors to improve efficiency and safety. Advanced robotics systems can perform complex tasks with precision and consistency, reducing the risk of human error. The development of autonomous robots and drones is opening up new possibilities for exploration and monitoring. As robotics technology advances, it is important to consider the ethical and societal implications, including the impact on employment and the need for regulations. By addressing these challenges, we can harness the potential of robotics to drive innovation and progress.',
-    createdAt: DateTime(2023, 4, 18),
+    createdAt: DateTime(2024, 6, 10),
   ),
   Blog(
+    likes: 5,
     BlogCategory.medical,
     'assets/images/blogs/blog2.jpeg',
     'Henry Wilson',
     [
       Comment(
-        "assets/images/add/user_image.png",
         author: 'Emily White',
         content: 'This is an interesting perspective on education trends.',
         createdAt: DateTime.now().subtract(const Duration(days: 1)),
       ),
       Comment(
-        "assets/images/add/user_image.png",
         author: 'Michael Brown',
         content: 'Thanks for sharing!',
         createdAt: DateTime.now().subtract(const Duration(hours: 10)),
@@ -128,6 +123,5 @@ final List<Blog> dummyDatas = [
     content:
         'Telemedicine is becoming more prevalent, offering healthcare services remotely. This technology allows patients to consult with doctors and specialists without the need for in-person visits. Telemedicine is particularly beneficial for those in remote or underserved areas, providing access to medical expertise that may not be otherwise available. It also offers convenience and flexibility for patients with busy schedules. However, the widespread adoption of telemedicine also raises issues related to data privacy, security, and the quality of care. As telemedicine continues to evolve, it will be important to address these challenges and ensure that it complements traditional healthcare services effectively.',
     createdAt: DateTime(2023, 5, 25),
-    saved: true,
   ),
 ];
