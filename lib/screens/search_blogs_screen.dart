@@ -20,7 +20,7 @@ class SearchBlogsScreen extends StatelessWidget {
           }).toList();
 
           return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.9,
+            height: MediaQuery.of(context).size.height * 0.5,
             child: ListView.separated(
                 itemCount: filteredBlogs.length,
                 separatorBuilder: (context, index) => const Gap(10),

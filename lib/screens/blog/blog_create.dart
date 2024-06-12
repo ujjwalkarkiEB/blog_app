@@ -32,7 +32,7 @@ class _BlogCreateScreenState extends State<BlogCreateScreen> {
   void _pickImageFrom() async {
     final ImagePicker imagePicker = ImagePicker();
     final XFile? imgFile = await imagePicker.pickImage(
-        source: ImageSource.camera,
+        source: ImageSource.gallery,
         maxHeight: 200,
         maxWidth: 200,
         imageQuality: 100);

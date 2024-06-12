@@ -52,13 +52,16 @@ class BlogCard extends StatelessWidget {
               child: Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      blog.image,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                    ),
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      child: Hero(
+                        transitionOnUserGestures: true,
+                        tag: blog.title,
+                        child: Image.asset(
+                          blog.image,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                        ),
+                      )),
                   Positioned(
                     left: 10,
                     bottom: 15,

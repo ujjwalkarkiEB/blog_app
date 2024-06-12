@@ -101,11 +101,15 @@ class _BlogDetailScreenState extends State<BlogDetailScreen> {
                   clipBehavior: Clip.hardEdge,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
-                  child: Image.asset(
-                    blog.image,
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.fill,
+                  child: Hero(
+                    transitionOnUserGestures: true,
+                    tag: blog.title,
+                    child: Image.asset(
+                      blog.image,
+                      height: 200,
+                      width: double.infinity,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
                 const Gap(10),
