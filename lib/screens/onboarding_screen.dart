@@ -5,8 +5,6 @@ import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../modal/profile_modal.dart';
-
 @RoutePage()
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

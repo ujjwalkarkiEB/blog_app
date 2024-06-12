@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:blog_app/models/comment.dart';
 import 'package:blog_app/utils/helpers/post_date.dart';
 import 'package:flutter/material.dart';

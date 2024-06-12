@@ -80,7 +80,7 @@ class BlogProvider extends ChangeNotifier {
   void toggleSavedBlog(Blog blog, User user) {
     final isLikedBlogs = user.likedBlogs.contains(blog);
     if (isLikedBlogs) {
-      if (user.likedBlogs.isNotEmpty) {
+      if (blog.likes != 0) {
         blog.likes -= 1;
         user.likedBlogs.remove(blog);
       }
