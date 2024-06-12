@@ -1,4 +1,4 @@
 # blog_app
 
 ## screenshots
-![login screen](images/signin.jpg "Sigin Screen")
+![login screen](images/login.jpg "Sigin Screen")
