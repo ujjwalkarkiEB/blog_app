@@ -1,4 +1,4 @@
 # blog_app
 
 ## screenshots
-<img alt="login src="images/login.jpg width="100">
+<img src="https://github.com/ujjwalkarkiEB/blog_app/blob/main/images/login.jpg"  width="200" height="250" />
