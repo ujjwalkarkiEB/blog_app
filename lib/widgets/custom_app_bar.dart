@@ -75,7 +75,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             IconButton(
                 onPressed: () {
                   authenticator.logoutUser(userInfo);
-                  if (userInfo.authenticatedState) {
+                  if (!userInfo.authenticatedState) {
                     context.router.pushAndPopUntil(const AuthenticationRoute(),
                         predicate: (r) => false);
                   }
