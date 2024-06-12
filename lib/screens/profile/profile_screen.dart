@@ -43,7 +43,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: user.profileImg.startsWith('/assets')
+                    backgroundImage: user.profileImg.startsWith('assets/')
                         ? AssetImage(user.profileImg)
                         : FileImage(File(user.profileImg)),
                   ),
