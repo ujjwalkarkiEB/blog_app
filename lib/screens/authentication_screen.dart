@@ -215,23 +215,25 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
             ),
           ),
           // ------ [signin/up text] / button
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(isSignUp
-                    ? 'Already have an account !'
-                    : 'Don\'t have account ?'),
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        isSignUp = !isSignUp;
-                        formKey.currentState!.reset();
-                      });
-                    },
-                    child: Text(isSignUp ? 'Login' : 'Sign Up')),
-              ],
+          SafeArea(
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(isSignUp
+                      ? 'Already have an account !'
+                      : 'Don\'t have account ?'),
+                  TextButton(
+                      onPressed: () {
+                        setState(() {
+                          isSignUp = !isSignUp;
+                          formKey.currentState!.reset();
+                        });
+                      },
+                      child: Text(isSignUp ? 'Login' : 'Sign Up')),
+                ],
+              ),
             ),
           )
         ]),
